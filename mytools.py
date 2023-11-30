@@ -2,11 +2,38 @@
 import pandas as pd
 from pyreadstat import pyreadstat
 import matplotlib.pyplot as plt
+from scipy import stats 
 
 # 绘图设置
 plt.rcParams["font.sans-serif"] = ["SimHei"]  # 设置字体
 
 # 读取SPSS格式数据
+
+# 在mytools包中新增变量均值的参数估计函数
+ 
+  
+
+
+def 执行单个变量均值的区间估计推论统计(data_file, confidence):  
+    # 读取数据文件  
+    df = pd.read_csv(data_file)  
+      
+    # 计算均值和标准误差  
+    mean = df['average'].mean()  
+    std_error = stats.sem(df['average'])  
+      
+    # 设定自由度  
+    degrees_of_freedom = len(df['average']) - 1  
+      
+    # 计算置信区间  
+    confidence_interval = stats.t.interval(confidence, degrees_of_freedom, loc=mean, scale=std_error)  
+      
+    # 输出结果  
+    print(f"均值：{mean:.2f}")  
+    print(f"均值在置信水平{confidence}下的置信区间为：", confidence_interval)
+    
+  
+
 
 
 def 绘制单个类别变量柱状图(数据表, 变量: str):
